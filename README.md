@@ -2,16 +2,16 @@
 📉 Telecom Customer Churn Prediction
 Predicting which customers are likely to leave a telecom company — enabling proactive retention strategies before churn happens.
 ---
-🧠 Problem Statement
+  Problem Statement
 Customer churn is one of the most costly problems in the telecom industry. Acquiring a new customer costs significantly more than retaining an existing one. This project builds a machine learning pipeline to identify high-risk customers before they leave, giving business teams the opportunity to intervene with targeted offers or support.
 ---
-📦 Dataset
+  Dataset
 Source: IBM Telco Customer Churn Dataset
 Size: 7,043 customers, 21 features
 Target: `Churn` — whether a customer left within the last month (Yes/No)
 Class distribution: ~73% Stay / ~27% Churn (imbalanced)
 ---
-⚙️ Project Pipeline
+  Project Pipeline
 ```
 Raw CSV → Data Cleaning → Feature Engineering → Train/Test Split
 → Model Training (3 models) → Evaluation → SHAP Analysis
@@ -24,14 +24,14 @@ Applied `pd.get_dummies` for categorical encoding
 Used `StandardScaler` for Logistic Regression
 Applied `stratify=y` in train/test split to preserve class ratio
 ---
-🤖 Models Compared
+  Models Compared
 Model	ROC-AUC	Churn Recall	Churn F1
 Logistic Regression	0.835	0.80	0.61
 XGBoost	0.820	0.69	0.59
 Random Forest	0.818	0.49	0.55
 > **Winner: Logistic Regression** — highest ROC-AUC and best churn recall after class balancing.
 ---
-⚖️ Handling Class Imbalance
+  Handling Class Imbalance
 The dataset is imbalanced (~73% stay, ~27% churn). Without correction, models bias toward predicting "stay" and miss real churners.
 Solution: Applied `class_weight='balanced'` to Logistic Regression and Random Forest, and `scale_pos_weight=3` to XGBoost.
 Impact on Logistic Regression churn recall: 0.57 → 0.80
@@ -47,7 +47,7 @@ Churn EDA
 SHAP Feature Importance
 ![SHAP Summary](shap_summary.png)
 ---
-🔍 Key Insights (SHAP Analysis)
+  Key Insights (SHAP Analysis)
 SHAP (SHapley Additive exPlanations) reveals why the model makes each prediction — not just what it predicts.
 Feature	Impact
 Two-year contract	Strongest predictor of staying
@@ -57,7 +57,7 @@ Fiber optic internet	Associated with higher churn risk
 No internet service	Strongly predicts staying
 > These insights are directly actionable: focus retention efforts on month-to-month, fiber optic customers with high monthly charges in their first year.
 ---
-🛠️ Tech Stack
+  Tech Stack
 Python — Pandas, NumPy
 Scikit-learn — Logistic Regression, Random Forest, preprocessing, metrics
 XGBoost — Gradient boosting
